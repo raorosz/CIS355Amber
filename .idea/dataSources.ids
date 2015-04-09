@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - CIS355bswhitf1@localhost" uuid="13d1a2b5-24d9-4649-9595-3242bd97c8be">
+    <database-info product="MySQL" version="5.5.41-0+wheezy1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="CIS355bswhitf1"/>
+    <table name="attempts" schema="" catalog="CIS355bswhitf1" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="persons_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="quizzes_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="attempt_date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="attempt_number" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="score" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="attempts_ibfk_1" columns="persons_id" ref-table="persons" ref-schema="" ref-catalog="CIS355bswhitf1" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="attempts_ibfk_2" columns="quizzes_id" ref-table="quizzes" ref-schema="" ref-catalog="CIS355bswhitf1" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="responses_ibfk_3" table="responses" schema="" catalog="CIS355bswhitf1" columns="attempts_id"/>
+    </table>
+    <table name="lessons" schema="" catalog="CIS355bswhitf1" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="subject" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="resources" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="persons_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="date_created" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="search_field" sqlType="VARCHAR" precision="1000" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="lessons_ibfk_1" columns="persons_id" ref-table="persons" ref-schema="" ref-catalog="CIS355bswhitf1" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="quizzes_ibfk_1" table="quizzes" schema="" catalog="CIS355bswhitf1" columns="lessons_id"/>
+      <exported-key name="reviews_ibfk_2" table="reviews" schema="" catalog="CIS355bswhitf1" columns="lessons_id"/>
+    </table>
+    <table name="options" schema="" catalog="CIS355bswhitf1" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="question_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="option" sqlType="VARCHAR" precision="400" scale="0" nullable="false" jdbcType="12"/>
+      <column name="correct_option" sqlType="DECIMAL" precision="10" scale="0" nullable="false" jdbcType="3"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="options_ibfk_1" columns="question_id" ref-table="questions" ref-schema="" ref-catalog="CIS355bswhitf1" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="responses_ibfk_2" table="responses" schema="" catalog="CIS355bswhitf1" columns="options_id"/>
+    </table>
+    <table name="persons" schema="" catalog="CIS355bswhitf1" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="role" sqlType="ENUM" precision="13" scale="0" nullable="false" jdbcType="1"/>
+      <column name="secondary_role" sqlType="ENUM" precision="13" scale="0" nullable="false" jdbcType="1"/>
+      <column name="first_name" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password_hash" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12" remarks="U0hBLTUxMg=="/>
+      <column name="school" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="attempts_ibfk_1" table="attempts" schema="" catalog="CIS355bswhitf1" columns="persons_id"/>
+      <exported-key name="lessons_ibfk_1" table="lessons" schema="" catalog="CIS355bswhitf1" columns="persons_id"/>
+      <exported-key name="reviews_ibfk_1" table="reviews" schema="" catalog="CIS355bswhitf1" columns="persons_id"/>
+    </table>
+    <table name="questions" schema="" catalog="CIS355bswhitf1" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="quizzes_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="question" sqlType="VARCHAR" precision="400" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="questions_ibfk_1" columns="quizzes_id" ref-table="quizzes" ref-schema="" ref-catalog="CIS355bswhitf1" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="options_ibfk_1" table="options" schema="" catalog="CIS355bswhitf1" columns="question_id"/>
+      <exported-key name="responses_ibfk_1" table="responses" schema="" catalog="CIS355bswhitf1" columns="questions_id"/>
+    </table>
+    <table name="quizzes" schema="" catalog="CIS355bswhitf1" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="lessons_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="attempts_allowed" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="2000" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="quizzes_ibfk_1" columns="lessons_id" ref-table="lessons" ref-schema="" ref-catalog="CIS355bswhitf1" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="attempts_ibfk_2" table="attempts" schema="" catalog="CIS355bswhitf1" columns="quizzes_id"/>
+      <exported-key name="questions_ibfk_1" table="questions" schema="" catalog="CIS355bswhitf1" columns="quizzes_id"/>
+    </table>
+    <table name="reports" schema="" catalog="CIS355bswhitf1" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="reportname" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
+      <column name="reportquery" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
+      <column name="persons_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="date_created" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="persons_id" unique="false" columns="persons_id"/>
+    </table>
+    <table name="responses" schema="" catalog="CIS355bswhitf1" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="questions_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="attempts_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="options_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="responses_ibfk_1" columns="questions_id" ref-table="questions" ref-schema="" ref-catalog="CIS355bswhitf1" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="responses_ibfk_2" columns="options_id" ref-table="options" ref-schema="" ref-catalog="CIS355bswhitf1" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="responses_ibfk_3" columns="attempts_id" ref-table="attempts" ref-schema="" ref-catalog="CIS355bswhitf1" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="reviews" schema="" catalog="CIS355bswhitf1" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="persons_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="lessons_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="review" sqlType="VARCHAR" precision="2000" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date_submitted" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="rating" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="reviews_ibfk_1" columns="persons_id" ref-table="persons" ref-schema="" ref-catalog="CIS355bswhitf1" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="reviews_ibfk_2" columns="lessons_id" ref-table="lessons" ref-schema="" ref-catalog="CIS355bswhitf1" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+  </data-source>
+</component>

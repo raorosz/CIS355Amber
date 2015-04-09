@@ -1,2 +1,1 @@
-# CIS355Amber
-CIS355
+![Scale PHP](http://www.bradwhitfield.com/img/scale.png)
